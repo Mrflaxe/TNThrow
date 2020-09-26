@@ -1,0 +1,35 @@
+# Time after which the explosion occurs
+fusetime: 3
+# Power of launch (influencing on distance and speed).
+power: 0.8
+# Cooldown, just cooldown.
+cooldown: 1
+
+# Blacklist of blocks which shouldn't blow up. In revision.
+blacklist:
+  - "GRAVEL"
+  - "GOLD_ORE"
+  - "IRON_ORE"
+  - "COAL_ORE"
+  - "OAK_LOG"
+  - "OAK_WOOD"
+  - "SPRUCE_LOG"
+  - "SPRUCE_WOOD"
+  - "BIRCH_LOG"
+  - "BIRCH_WOOD"
+  - "JUNGLE_LOG"
+  - "JUNGLE_WOOD"
+  - "ACAIA_LOG"
+  - "ACAIA_WOOD"
+  - "DARK_OAK_LOG"
+  - "DARK_OAK_WOOD"
+  - "LAPIS_ORE"
+  - "DIAMOND_ORE"
+  - "FURNACE"
+  - "REDSTONE_ORE"
+  - "PUMPKIN"
+  - "LIT_PUMPKIN"
+  - "MELON"
+  - "BREWING_STAND"
+  - "END_STONE"
+  - "EMERALD_ORE"

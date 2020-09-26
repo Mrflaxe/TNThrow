@@ -1,0 +1,17 @@
+name: ${project.name}
+api-version: 1.16
+main: ru.mrflaxe.tnthrow.Tnthrow
+version: ${project.version}
+author: Mrflaxe
+
+depend: [SKLibrary]
+
+permissions:
+  tnt:
+    refresh:
+      default: op
+      discription: access to /tntrefresh
+commands:
+  tntrefresh:
+    descriprion: refresh configurations
+    usage: /tntrefresh
