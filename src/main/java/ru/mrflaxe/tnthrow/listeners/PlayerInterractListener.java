@@ -13,20 +13,26 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
+import ru.mrflaxe.tnthrow.meсhanics.TeamProvider;
 import ru.soknight.lib.configuration.Configuration;
 import ru.soknight.lib.cooldown.preset.LitePlayersCooldownStorage;
 
 public class PlayerInterractListener implements Listener {
 
 	private final Configuration config;
+	private final JavaPlugin plugin;
+	private final TeamProvider teamProvider;
 	
 	private final LitePlayersCooldownStorage cooldown;
 	
-	public PlayerInterractListener(Configuration config) {
+	public PlayerInterractListener(Configuration config, JavaPlugin plugin, TeamProvider teamProvider) {
 		this.config = config;
+		this.plugin = plugin;
+		this.teamProvider = teamProvider;
 		
 		this.cooldown = new LitePlayersCooldownStorage(config.getInt("cooldown", 1));
 	}
@@ -65,6 +71,8 @@ public class PlayerInterractListener implements Listener {
 		
 		// And... we launch a TNT!
 		Location loc = p.getLocation();
+		String team = teamProvider.getTeam(name);
+		
 		TNTPrimed tnt = (TNTPrimed) loc.getWorld().spawnEntity(loc.add(0, 1, 0), EntityType.PRIMED_TNT);
 		
 		double power = config.getDouble("power");
@@ -75,10 +83,12 @@ public class PlayerInterractListener implements Listener {
 		
 		tnt.setVelocity(velocity);
 		tnt.setFuseTicks(ticks);
+		tnt.setMetadata("team", new FixedMetadataValue(plugin, team));
+		tnt.setMetadata("player", new FixedMetadataValue(plugin, name));
 		
 		loc.getWorld().playSound(loc, Sound.ENTITY_FIREWORK_ROCKET_LAUNCH, 10, 1);
 	}
-	
+
 	// registration of our handler which will perform in the main class.
 	public void register(JavaPlugin plugin) {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
